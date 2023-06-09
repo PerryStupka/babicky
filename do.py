@@ -49,6 +49,10 @@ def load_mds(path):
 
 @click.command()
 def pub():
+    #     ensure necessary directories exist
+    folders = [IMG_DIR, AUDIO_DIR]
+    for folder in folders:
+        os.makedirs(f"{PUBLIC_DIR}/{folder}",exist_ok=True)
     """parse the MDs"""
     eps = load_eps()
     env = Environment(
@@ -58,10 +62,6 @@ def pub():
         f.write(env.get_template('home.html.j2').render(eps=eps))
     with open(f'{PUBLIC_DIR}/rss.xml', 'w') as f:
         f.write(env.get_template('rss.xml.j2').render(eps=eps))
-    #     ensure necessary directories exist
-    folders = [IMG_DIR, AUDIO_DIR]
-    for folder in folders:
-        os.makedirs(f"{PUBLIC_DIR}/{folder}",exist_ok=True)
     #  copy audio files from sound dir
     for file in os.listdir(SOUND_DIR):
         shutil.copy(os.path.join(SOUND_DIR,file), f"{PUBLIC_DIR}/{AUDIO_DIR}")
