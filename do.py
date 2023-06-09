@@ -1,6 +1,8 @@
 import datetime
 import pathlib
 import re
+import os
+import shutil
 
 import click
 import frontmatter
@@ -9,6 +11,10 @@ import mistune
 
 
 META_DIR = "sources/meta"
+SOUND_DIR = "sources/sound"
+PUBLIC_DIR = "public"
+IMG_DIR = "img"
+AUDIO_DIR = "audio"
 
 @click.group()
 def main():
@@ -48,10 +54,20 @@ def pub():
     env = Environment(
         loader=FileSystemLoader('templates'),
     )
-    with open(f'public/index.html', 'w') as f:
+    with open(f'{PUBLIC_DIR}/index.html', 'w') as f:
         f.write(env.get_template('home.html.j2').render(eps=eps))
-    with open(f'public/rss.xml', 'w') as f:
+    with open(f'{PUBLIC_DIR}/rss.xml', 'w') as f:
         f.write(env.get_template('rss.xml.j2').render(eps=eps))
+    #     ensure necessary directories exist
+    folders = [IMG_DIR, AUDIO_DIR]
+    for folder in folders:
+        os.makedirs(f"{PUBLIC_DIR}/{folder}",exist_ok=True)
+    #  copy audio files from sound dir
+    for file in os.listdir(SOUND_DIR):
+        shutil.copy(os.path.join(SOUND_DIR,file), f"{PUBLIC_DIR}/{AUDIO_DIR}")
+    # shutil.copytree(f"{SOUND_DIR}/*.*",f"{PUBLIC_DIR}/{AUDIO_DIR}")
+#     copy images
+
 
 
 
