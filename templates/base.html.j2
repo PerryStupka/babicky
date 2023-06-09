@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock%}</title>
+    <style>
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Ubuntu;
+}
+header {
+    flex: 0 0 50px;
+}
+footer {
+    flex: 0 0 50px;
+}
+.content {
+    display: flex;
+    flex: 1;
+}
+main {
+    flex: 1;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+}
+.leftnav {
+    flex: 0 0 12em;
+    order: -1;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-left: 0.2rem;
+    background-color: lightgray;
+
+}
+.leftnav .menuitem {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    {#border-color: white;#}
+    {#border-style: solid;#}
+    {#border-width: thin;#}
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+    </style>
+    {% block customhead %}{% endblock %}
+</head>
+<body>
+    <header class="uppernav">{% block uppernav %}{% endblock %}</header>
+    <div class="content">
+        <main>{% block content %}{% endblock %}</main>
+        <aside class="leftnav">{% block leftnav %}{% endblock %}</aside>
+    </div>
+    <footer>{% block footer %}{% endblock %}</footer>
+    {% block bodyend %}{% endblock %}
+</body>
