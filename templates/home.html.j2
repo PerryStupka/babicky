@@ -3,9 +3,11 @@
     <h1>Babičky</h1>
     <img src="img/icon.png" width="300">
     <h3>Praha očima babiček</h3>
-    <ul>
+
     {% for ep in eps %}
-        <li>{{ep.title}}</li>
+        <p>{{ep.title}}</p>
     {% endfor %}
-    </ul>
+
+    <h3>Poslouchejte na</h3>
+    <p><a href="https://open.spotify.com/show/062l3iixGVOyMvgSO6sUu2"><img src="img/spotify.svg" width="20"></a></p>
 {% endblock %}

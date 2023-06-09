@@ -17,6 +17,10 @@ PUBLIC_DIR = "public"
 IMG_DIR = "img"
 AUDIO_DIR = "audio"
 
+CONFIG = {
+    "author":"Perry Stupka"
+}
+
 @click.group()
 def main():
     """click"""
@@ -63,7 +67,7 @@ def pub():
         loader=FileSystemLoader('templates'),
     )
     with open(f'{PUBLIC_DIR}/index.html', 'w') as f:
-        f.write(env.get_template('home.html.j2').render(eps=eps))
+        f.write(env.get_template('home.html.j2').render(eps=eps, **CONFIG))
     with open(f'{PUBLIC_DIR}/rss.xml', 'w') as f:
         f.write(env.get_template('rss.xml.j2').render(eps=eps))
     #  copy audio files from sound dir

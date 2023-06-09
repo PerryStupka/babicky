@@ -13,6 +13,7 @@ header {
 }
 footer {
     flex: 0 0 50px;
+    text-align: center;
 }
 .content {
     display: flex;
@@ -22,28 +23,16 @@ main {
     flex: 1;
     padding-left: 0.5rem;
     padding-top: 0.5rem;
+    text-align: center;
 }
 .leftnav {
-    flex: 0 0 12em;
+    flex: 0 0 5em;
     order: -1;
     padding-top: 1rem;
     padding-right: 1rem;
     padding-left: 0.2rem;
-    background-color: lightgray;
+    {#background-color: lightgray;#}
 
-}
-.leftnav .menuitem {
-    display: block;
-    text-decoration: none;
-    color: black;
-    font-weight: bolder;
-    {#border-color: white;#}
-    {#border-style: solid;#}
-    {#border-width: thin;#}
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
 }
     </style>
     {% block customhead %}{% endblock %}
@@ -52,8 +41,7 @@ main {
     <header class="uppernav">{% block uppernav %}{% endblock %}</header>
     <div class="content">
         <main>{% block content %}{% endblock %}</main>
-        <aside class="leftnav">{% block leftnav %}{% endblock %}</aside>
     </div>
-    <footer>{% block footer %}{% endblock %}</footer>
+    <footer>{% block footer %}&copy; {{ author }}<br> <a href="https://www.instagram.com/p3rryfml/">ig: @p3rryfml</a>{% endblock %}</footer>
     {% block bodyend %}{% endblock %}
 </body>
