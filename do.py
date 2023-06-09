@@ -8,8 +8,9 @@ import click
 import frontmatter
 from jinja2 import Environment, select_autoescape, FileSystemLoader
 import mistune
+from mutagen.mp3 import MP3
 
-
+SOURCES_DIR = "sources"
 META_DIR = "sources/meta"
 SOUND_DIR = "sources/sound"
 PUBLIC_DIR = "public"
@@ -41,7 +42,10 @@ def load_mds(path):
             data['title'] = title_match.groupdict().get('title')
         else:
             data['title'] = data['filename']
-
+        sound_file = f"{SOUND_DIR}/{data['filename']}.mp3"
+        data["length"] = os.path.getsize(sound_file)
+        audio = MP3(sound_file)
+        data["duration"] = audio.info.length
         results.append(data)
 
     return results
@@ -65,6 +69,8 @@ def pub():
     #  copy audio files from sound dir
     for file in os.listdir(SOUND_DIR):
         shutil.copy(os.path.join(SOUND_DIR,file), f"{PUBLIC_DIR}/{AUDIO_DIR}")
+    for file in os.listdir(f"{SOURCES_DIR}/{IMG_DIR}"):
+        shutil.copy(os.path.join(f"{SOURCES_DIR}/{IMG_DIR}",file), f"{PUBLIC_DIR}/{IMG_DIR}")
     # shutil.copytree(f"{SOUND_DIR}/*.*",f"{PUBLIC_DIR}/{AUDIO_DIR}")
 #     copy images
 

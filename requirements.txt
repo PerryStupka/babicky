@@ -2,3 +2,4 @@ click
 python-frontmatter
 Jinja2
 mistune
+mutagen
