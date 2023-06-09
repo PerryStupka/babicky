@@ -3,13 +3,14 @@
     <h1>Babičky</h1>
     <img src="img/icon.png" width="300">
     <h3>Praha očima babiček</h3>
-
+    <h4>Podcast z toulek po Praze s mými babičkami.</h4>
     {% for ep in eps %}
         <p>{{ep.title}}</p>
     {% endfor %}
 
-    <h3>Poslouchejte na</h3>
-    <p><a href="https://open.spotify.com/show/062l3iixGVOyMvgSO6sUu2"><img src="img/spotify.svg" width="20"></a></p>
-    <h3>RSS</h3>
-    <p><a href="rss.xml"><img src="img/feed.svg" width="20"></a></p>
+    <h3>Poslouchejte na:</h3>
+    <p><a href="https://open.spotify.com/show/062l3iixGVOyMvgSO6sUu2" target="_blank"><img src="img/spotify.svg" width="20"></a>
+        &nbsp;&nbsp;<a href="https://podcasts.apple.com/us/podcast/babi%C4%8Dky/id1691958012" target="_blank"><img src="img/apple.svg" width="20"></a>
+        &nbsp;&nbsp;<a href="rss.xml" target="_blank"><img src="img/feed.svg" width="20"></a>
+    </p>
 {% endblock %}
