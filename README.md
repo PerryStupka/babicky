@@ -3,4 +3,5 @@
 todo:
 - slightly nicer web :)
   - favicon
-  - ep detail + player 
+  - ep detail + player
+- move all hardcoded values to config 
