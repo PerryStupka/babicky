@@ -16,10 +16,13 @@ SOUND_DIR = "sources/sound"
 PUBLIC_DIR = "public"
 IMG_DIR = "img"
 AUDIO_DIR = "audio"
+EPISODES_DIR = "episodes"
 
 CONFIG = {
     "author":"Perry Stupka",
-    "site_language":"cs"
+    "site_language":"cs",
+    "insta": "@p3rryfml",
+    "cop_year": "2023"
 }
 
 @click.group()
@@ -47,10 +50,12 @@ def load_mds(path):
             data['title'] = title_match.groupdict().get('title')
         else:
             data['title'] = data['filename']
+        # todo: html filename from title
         sound_file = f"{SOUND_DIR}/{data['filename']}.mp3"
         data["length"] = os.path.getsize(sound_file)
         audio = MP3(sound_file)
         data["duration"] = audio.info.length
+        # todo: link to previous ep
         results.append(data)
 
     return results
@@ -59,7 +64,7 @@ def load_mds(path):
 @click.command()
 def pub():
     #     ensure necessary directories exist
-    folders = [IMG_DIR, AUDIO_DIR]
+    folders = [IMG_DIR, AUDIO_DIR, EPISODES_DIR]
     for folder in folders:
         os.makedirs(f"{PUBLIC_DIR}/{folder}",exist_ok=True)
     """parse the MDs"""
@@ -71,6 +76,10 @@ def pub():
         f.write(env.get_template('home.html.j2').render(eps=eps, **CONFIG))
     with open(f'{PUBLIC_DIR}/rss.xml', 'w') as f:
         f.write(env.get_template('rss.xml.j2').render(eps=eps))
+    for ep in eps:
+        with open(f'{PUBLIC_DIR}/{EPISODES_DIR}/{ep["filename"]}.html', 'w') as f:
+            f.write(env.get_template('ep.html.j2').render(ep=ep, **CONFIG))
+
     #  copy audio files from sound dir
     for file in os.listdir(SOUND_DIR):
         shutil.copy(os.path.join(SOUND_DIR,file), f"{PUBLIC_DIR}/{AUDIO_DIR}")

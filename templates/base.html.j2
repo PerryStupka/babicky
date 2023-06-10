@@ -64,10 +64,12 @@ h1 {
     margin: 1.5rem 1rem 1rem 1rem;
 }
 
-h1,h2,h3,h4,h5,h6,blockquote,dl,img,figure {
-    margin: 0.7rem 0;
+h1,h2,h3,h4,h5,h6 {
+    margin: 0.7rem 0.3rem 0.3rem 0.3rem;
 }
-
+blockquote,dl,img,figure {
+    margin: 0.2rem 0;
+}
 p {
     margin: 0.2rem 0;
 }
@@ -209,7 +211,7 @@ sup { font-size: 80%; vertical-align: top; }
 body {
     display: flex;
     flex-direction: column;
-    font-family: Ubuntu;
+    font-family: sans-serif;
 }
 header {
     flex: 0 0 50px;
@@ -235,6 +237,6 @@ main {
     <div class="content">
         <main>{% block content %}{% endblock %}</main>
     </div>
-    <footer>{% block footer %}&copy; {{ author }} 2023<br> <a href="https://www.instagram.com/p3rryfml/">ig: @p3rryfml</a>{% endblock %}</footer>
+    <footer>{% block footer %}&copy; {{ author }} {{ cop_year }}<br> <a href="https://www.instagram.com/{{ insta }}/">ig: {{ insta }}</a>{% endblock %}</footer>
     {% block bodyend %}{% endblock %}
 </body>
