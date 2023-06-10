@@ -18,7 +18,8 @@ IMG_DIR = "img"
 AUDIO_DIR = "audio"
 
 CONFIG = {
-    "author":"Perry Stupka"
+    "author":"Perry Stupka",
+    "site_language":"cs"
 }
 
 @click.group()
